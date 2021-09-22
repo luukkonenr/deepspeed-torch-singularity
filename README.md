@@ -7,8 +7,7 @@ You may need to set cachedir for singularity to avoid 'disk is full'-errors
 
 export SINGULARITY_TMPDIR=/path/ e.g /$HOME/.cache/singularity
 
-BUILD:
-  sudo singularity build container-name Singularity
+**BUILD:** sudo singularity build container-name Singularity
 
 ## Using a container
 singularity exec container-name python test.py (exec a python script within a container)
