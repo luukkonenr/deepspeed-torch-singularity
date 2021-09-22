@@ -3,14 +3,16 @@ Install singularity:
   https://github.com/sylabs/singularity/releases
 
 ## Building a container
-You may need to se set cachedir for singularity to avoid 'disk is full'-errors
+You may need to set cachedir for singularity to avoid 'disk is full'-errors
+
 export SINGULARITY_TMPDIR=/path/ e.g /$HOME/.cache/singularity
+
 BUILD:
-  sudo singularity build <container-name> Singularity
+  sudo singularity build container-name Singularity
 
 ## Using a container
-singularity exec <container-name> python test.py (exec a python script within a container)
-singularity shell <container-name> (interactive shell)
+singularity exec container-name python test.py (exec a python script within a container)
+singularity shell container-name (interactive shell)
 
 ## Notes
 This version has been configured to use pdsh for inter-node communications. No other runners have been tested and may need spesific configurations. 
