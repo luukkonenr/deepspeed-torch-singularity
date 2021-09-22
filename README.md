@@ -1,8 +1,8 @@
 # Singularity-recipe-template for building Deepspeed-enabled pytorch-container 
 ## Install singularity
 Follow these instructions to install singularity on a system
-    https://sylabs.io/guides/3.3/user-guide/installation.html
-
+    https://github.com/hpcng/singularity/blob/master/INSTALL.md
+    
 ## Building a container
 
 You need root-privileges (or --fakeroot) to build containers. (In my undest
