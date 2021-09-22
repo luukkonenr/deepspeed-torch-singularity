@@ -30,9 +30,9 @@ module load pdsh/2.31
 #Bind directory with pdsh to /usr/local/sbin in singularity
 export SING_FLAGS="$SING_FLAGS -B /appl/spack/v014/install-tree/gcc-4.8.5/pdsh-2.31-cdzt5w/bin:/usr/local/sbin"`
 
-export SING_IMAGE=/PATH/TO/CONTAINER/deepspeed.sif #This needs to match the path inside your init_node.sh
+export SING_IMAGE=/PATH/TO/CONTAINER/deepspeed.sif # This needs to match the path inside your init_node.sh
 export SING_FLAGS=$SING_FLAGS "--nv" # Enable GPU
-export TORCH_EXT_DIR=/path/to/some/dir/ #I f you have existing dir with some ops, may cause a hang with a msg about using this torch_ext_dir. Try removing that dir and run your job again.
+export TORCH_EXT_DIR=/path/to/some/dir/ # I f you have existing dir with some ops, may cause a hang with a msg about using this torch_ext_dir. Try removing that dir and run your job again.
 ```
 
 **RUNNING:**
