@@ -11,6 +11,7 @@ export SINGULARITY_TMPDIR=/path/ e.g /$HOME/.cache/singularity
 
 ## Using a container
 singularity exec container-name python test.py (exec a python script within a container)
+
 singularity shell container-name (interactive shell)
 
 ## Notes
