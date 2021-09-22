@@ -1,15 +1,16 @@
 # Singularity-recipe-template for building Deepspeed-enabled pytorch-container 
-Install singularity:
-  https://github.com/sylabs/singularity/releases
+## Install singularity
+Follow these instructions to install singularity on a system
+    https://sylabs.io/guides/3.3/user-guide/installation.html
 
 ## Building a container
+
+You need root-privileges (or --fakeroot) to build containers. (In my undest
 You may need to set cachedir for singularity to avoid 'disk is full'-errors
 
 `export SINGULARITY_TMPDIR=/path/ e.g /$HOME/.cache/singularity`
 
 **BUILD:** `sudo singularity build container-name Singularity`
-
-
 
 ## Running on CSC-environment
 
@@ -39,7 +40,6 @@ export TORCH_EXT_DIR=/path/to/some/dir/ #I f you have existing dir with some ops
 
 **EXAMPLE:**
   ```singularity_wrapper exec deepspeed --hostfile=hostfile.txt --master_addr=$MASTER_NODE /projappl/project_2004600/risto/model3multi/training/trainer.py --train_data $TRAIN_DATA \ ... ```
-
 
 
 
