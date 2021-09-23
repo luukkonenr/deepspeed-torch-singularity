@@ -65,7 +65,8 @@ jobs:
             gettext \
             openssl \
             perl \
-          wget https://github.com/git/git/archive/refs/tags/v2.33.0.tar.gz 
+          wget https://github.com/git/git/releases/tag/v2.33.0
+          
           tar -xzf git-2.33.0.tar.gz
           cd git-2.33.0
           make configure
