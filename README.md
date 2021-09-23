@@ -2,15 +2,20 @@
 ## Install singularity
 Follow these instructions to install singularity on a system
     https://github.com/hpcng/singularity/blob/master/INSTALL.md
-    
+
+NOTE: I've used **Singularity version 3.5.3**, newest 3.8.3 gave me some errors and I think it uses later gcc or something like that which results in build problems with some of the libraries.
+
 ## Building a container
 
 You need root-privileges (or --fakeroot) to build containers. (In my undest
 You may need to set cachedir for singularity to avoid 'disk is full'-errors
 
-`export SINGULARITY_TMPDIR=/path/ e.g /$HOME/.cache/singularity`
-
-**BUILD:** `sudo singularity build container-name Singularity`
+```
+mkdir $HOME/.cache/singularity/
+export SINGULARITY_TMPDIR=/path/ e.g $HOME/.cache/singularity/
+export SINGULARITY_CACHEDIR=/path/ e.g $HOME/.cache/singularity/
+```
+**BUILD:** `sudo -E singularity build container-name Singularity`
 
 ## Running on CSC-environment
 
