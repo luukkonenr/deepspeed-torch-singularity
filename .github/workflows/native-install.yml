@@ -65,7 +65,6 @@ jobs:
             gettext \
             openssl \
             perl \
-            zlib \
           wget https://github.com/git/git/archive/refs/tags/v2.33.0.tar.gz 
           tar -xzf git-2.33.0.tar.gz
           cd git-2.33.0
