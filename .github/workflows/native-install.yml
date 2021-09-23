@@ -60,12 +60,12 @@ jobs:
             libseccomp-dev \
             pkg-config \
             dh-autoreconf \
-            curl-devel \
-            expat-devel \
-            gettext-devel \
-            openssl-devel \
-            perl-devel \
-            zlib-devel \
+            curl \
+            expat \
+            gettext \
+            openssl \
+            perl \
+            zlib \
           wget https://github.com/git/git/archive/refs/tags/v2.33.0.tar.gz 
           tar -xzf git-2.33.0.tar.gz
           cd git-2.33.0
