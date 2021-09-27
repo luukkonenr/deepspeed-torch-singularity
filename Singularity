@@ -1,7 +1,11 @@
 BootStrap: docker
 From: nvcr.io/nvidia/pytorch:21.08-py3
 
-  
+%setup
+  TMPDIR=home/runner/work/cache/
+  mkdir $TMPDIR
+  export SINGULARITY_TMPDIR=$TMPDIR
+  export SINGULARITY_CACHEDIR=$TMPDIR
 %post
   /opt/conda/bin/pip install --upgrade pip 
   /opt/conda/bin/pip install --upgrade  setuptools
