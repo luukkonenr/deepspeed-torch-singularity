@@ -88,9 +88,6 @@ jobs:
         run: |
          pwd 
          sudo df -h 
-         mkdir sing_tempdir
-         export SINGULARTY_TMPDIR=sing_tempdir/
-         export SINGULARITY_CACHEDIR=sing_tempdir/
          
          if [ -f "${{ matrix.changed_file }}" ]; then
             sudo -E singularity build container.sif ${{ matrix.changed_file }}
