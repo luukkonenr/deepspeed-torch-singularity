@@ -25,5 +25,3 @@ From: nvcr.io/nvidia/pytorch:21.08-py3
 
   perl -p -i -e 's/^\s*sys\.executable,\s*$/            "source node_init.sh;",\n            "singularity_wrapper exec python",\n/' /opt/conda/lib/python3.8/site-packages/deepspeed/launcher/multinode_runner.py
 
-%test
-  ds_report
