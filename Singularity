@@ -1,7 +1,6 @@
 BootStrap: docker
 From: nvcr.io/nvidia/pytorch:21.08-py3
 
-
 %setup
   export SINGULARITY_TMPDIR=$HOME/.cache/singularity/
   
