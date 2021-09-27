@@ -58,23 +58,9 @@ jobs:
             libgpgme11-dev \
             squashfs-tools \
             libseccomp-dev \
-            pkg-config \
-            dh-autoreconf \
-            curl \
-            expat \
-            gettext \
-            openssl \
-            perl \
-          wget https://github.com/git/git/releases/tag/v2.33.0
-          
-          tar -xzf git-2.33.0.tar.gz
-          cd git-2.33.0
-          make configure
-          ./configure --prefix=/usr
-          make all doc info
-          sudo make install install-doc install-html install-info
-            
-            
+            pkg-config \                      
+            sudo apt install git
+
 
       - name: Install Singularity
         if: ${{ env.keepgoing == 'true' }}
