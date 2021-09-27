@@ -58,9 +58,6 @@ jobs:
             squashfs-tools \
             libseccomp-dev \
             pkg-config 
-            
-          sudo apt install git
-
 
       - name: Install Singularity
         if: ${{ env.keepgoing == 'true' }}
@@ -89,7 +86,12 @@ jobs:
         env:
           recipe: ${{ matrix.changed_file }}
         run: |
-         ls 
+         pwd 
+         sudo df -h 
+         mkdir sing_tempdir
+         export SINGULARTY_TMPDIR=sing_tempdir/
+         export SINGULARITY_CACHEDIR=sing_tempdir/
+         
          if [ -f "${{ matrix.changed_file }}" ]; then
             sudo -E singularity build container.sif ${{ matrix.changed_file }}
             tag=$(echo "${recipe/Singularity\./}")
