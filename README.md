@@ -7,8 +7,8 @@ NOTE: I've used **Singularity version 3.5.3**, newest 3.8.3 gave me some errors 
 
 ## Building a container
 
-You need root-privileges (or --fakeroot) to build containers. (In my undest
-You may need to set cachedir for singularity to avoid 'disk is full'-errors
+You need root-privileges (or --fakeroot) to build containers.
+You may need to set cachedir for singularity to avoid 'no space left on device'-errors
 
 ```
 mkdir $HOME/.cache/singularity/
