@@ -55,6 +55,8 @@ PDSH-runner has been modified to contain relevant information about running pyth
 1) added line "source node_init.sh" *see node_init.sh*
 2) exec argument `python` changed to `singularity_wrapper exec python`
 File is located at`/opt/conda/lib/python3.8/site-packages/deepspeed/launcher/multinode_runner.py`
+* I've tried to test get build process working with Github Actions but during build I encounter "no space left on device"-error and build crashes. Will try to get this working so newest img would always be ready to get pulled.
+
 
 
 
