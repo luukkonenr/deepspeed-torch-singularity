@@ -49,12 +49,20 @@ export TORCH_EXT_DIR=/path/to/some/dir/ # I f you have existing dir with some op
 
 
 
-## Notes
+## Changes to packages:
 This version has been configured to use pdsh for inter-node communications. No other runners have been tested and may need spesific configurations. 
-PDSH-runner has been modified to contain relevant information about running python inside container: 
-1) added line "source node_init.sh" *see node_init.sh*
-2) exec argument `python` changed to `singularity_wrapper exec python`
-File is located at`/opt/conda/lib/python3.8/site-packages/deepspeed/launcher/multinode_runner.py`
+`/opt/conda/lib/python3.8/site-packages/deepspeed/launcher/multinode_runner.py` has been modified to contain relevant information about running python inside the container: 
+1) added line "source node_init.sh" *see node_init.sh* to PDSH-runner-class
+2) exec argument `python` changed to `singularity_wrapper exec python` to PDSH-runner-class
+
+## Notes
+* **IMPORTANT**: If you have a local installation of deepspeed it may conflict with the one in singularity. Run the following and make sure your install path is identical. If path points to a local installation, you need to shadow it out by renaming the package e.g. ['/users/$USER/.local/lib/python3.8/site-packages/deepspeed'] -->['/users/$USER/.local/lib/python3.8/site-packages/DEEPSPEED'], delete it or do it some other way.
+```
+export SING_IMAGE=/PATH/TO/CONTAINER/deepspeed.sif 
+singularity_wrapper exec ds_report 
+deepspeed install path ........... ['/opt/conda/lib/python3.8/site-packages/deepspeed']
+```
+
 * I've tried to test get build process working with Github Actions but during build I encounter "no space left on device"-error and build crashes. Will try to get this working so newest img would always be ready to get pulled.
 
 
