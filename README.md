@@ -55,3 +55,9 @@ PDSH-runner has been modified to contain relevant information about running pyth
 1) added line "source node_init.sh" *see node_init.sh*
 2) exec argument `python` changed to `singularity_wrapper exec python`
 File is located at`/opt/conda/lib/python3.8/site-packages/deepspeed/launcher/multinode_runner.py`
+
+
+
+## Resources:
+   * https://singularity-tutorial.github.io/ -- Basics of singularity usage
+   * https://sylabs.io/guides/3.5/user-guide/ -- Singularity docs (v.3.5)
