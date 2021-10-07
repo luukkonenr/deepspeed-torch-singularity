@@ -1,10 +1,8 @@
 FROM nvcr.io/nvidia/pytorch:21.09-py3 
 
 RUN /opt/conda/bin/pip install --upgrade pip &&  /opt/conda/bin/pip install --upgrade  setuptools && \
-    /opt/conda/bin/pip install  git+https://github.com/huggingface/transformers datasets ninja triton
-
-
-RUN export DS_BUILD_CPU_ADAM=1 \
+    /opt/conda/bin/pip install  git+https://github.com/huggingface/transformers datasets ninja triton \
+    export DS_BUILD_CPU_ADAM=1 \
     export DS_BUILD_FUSED_ADAM=1 \
     export DS_BUILD_FUSED_LAMB=1 \
     export DS_BUILD_SPARSE_ATTN=1 \
