@@ -1,4 +1,5 @@
 FROM nvcr.io/nvidia/pytorch:21.09-py3 
+
 RUN  /opt/conda/bin/pip install --upgrade pip
 RUN  /opt/conda/bin/pip install --upgrade  setuptools
 RUN  /opt/conda/bin/pip install  git+https://github.com/huggingface/transformers
