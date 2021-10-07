@@ -5,7 +5,7 @@ Follow these instructions to install singularity on a system
 
 NOTE: I've used **Singularity version 3.5.3**, newest 3.8.3 gave me some errors and I think it uses later gcc or something like that which results in build problems with some of the libraries.
 
-## Building a container
+## Option 1: Building a container on your own machine
 
 You need root-privileges (or --fakeroot) to build containers.
 You may need to set cachedir for singularity to avoid 'no space left on device'-errors
@@ -17,6 +17,10 @@ export SINGULARITY_CACHEDIR=/path/ e.g $HOME/.cache/singularity/
 ```
 **BUILD:** `sudo -E singularity build container-name Singularity`
 
+## Option 2: Pulling ready-built image from ghcr
+```export SINGULARITY_TMPDIR=/path/ e.g $HOME/.cache/singularity/
+export SINGULARITY_CACHEDIR=/path/ e.g $HOME/.cache/singularity/
+ singularity pull latest.sif docker://ghcr.io/luukkonenr/deepspeed-torch-singularity:latest```
 ## Running on CSC-environment
 
 If running on Mahti make sure your $HOME/.ssh/config is looking like this
