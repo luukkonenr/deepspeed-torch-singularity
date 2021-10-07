@@ -18,9 +18,11 @@ export SINGULARITY_CACHEDIR=/path/ e.g $HOME/.cache/singularity/
 **BUILD:** `sudo -E singularity build container-name Singularity`
 
 ## Option 2: Pulling ready-built image from ghcr
-```export SINGULARITY_TMPDIR=/path/ e.g $HOME/.cache/singularity/
+```
+export SINGULARITY_TMPDIR=/path/ e.g $HOME/.cache/singularity/
 export SINGULARITY_CACHEDIR=/path/ e.g $HOME/.cache/singularity/
- singularity pull latest.sif docker://ghcr.io/luukkonenr/deepspeed-torch-singularity:latest```
+singularity pull NAME_FOR_IMG docker://ghcr.io/luukkonenr/deepspeed-torch-singularity:latest
+ ```
 ## Running on CSC-environment
 
 If running on Mahti make sure your $HOME/.ssh/config is looking like this
