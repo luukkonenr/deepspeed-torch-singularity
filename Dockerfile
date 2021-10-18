@@ -8,5 +8,5 @@ ENV DS_BUILD_CPU_ADAM=1 DS_BUILD_FUSED_ADAM=1  DS_BUILD_FUSED_LAMB=0 DS_BUILD_SP
 RUN /opt/conda/bin/pip install deepspeed && \
     /opt/conda/bin/pip install --upgrade numpy
 
-RUN    perl -p -i -e 's/^\s*sys\.executable,\s*$/            "source node_init.sh;",\n            "singularity_wrapper exec python",\n/' /opt/conda/lib/python3.8/site-packages/deepspeed/launcher/multinode_runner.py
+RUN    perl -p -i -e 's/^\s*sys\.executable,\s*$/            "source node_init.sh;",\n            "singularity exec $SING_FLAGS $SING_IMAGE python",\n/' /opt/conda/lib/python3.8/site-packages/deepspeed/launcher/multinode_runner.py
 
