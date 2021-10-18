@@ -46,13 +46,18 @@ export SING_FLAGS=$SING_FLAGS "--nv" # Enable GPU
 export TORCH_EXT_DIR=/path/to/some/dir/ # I f you have existing dir with some ops, may cause a hang with a msg about using this torch_ext_dir. Try removing that dir and run your job again.
 ```
 
+Using csc singularity_wrapper:
+
 **RUNNING:**
-  `singularity_wrapper exec deepspeed DEEPSPEED_ARGUMENTS path/to/python_script.py PYTHON_ARGUMENTS`
+  `singularity_wrapper exec --contain deepspeed DEEPSPEED_ARGUMENTS path/to/python_script.py PYTHON_ARGUMENTS`
 
 **EXAMPLE:**
   ```singularity_wrapper exec deepspeed --hostfile=hostfile.txt --master_addr=$MASTER_NODE /projappl/project_2004600/risto/model3multi/training/trainer.py --train_data $TRAIN_DATA \ ... ```
 
+Using plain singularity and `--contain`-flag shadowing the /user/home/ to avoid possible conflicting user-packages:
 
+**EXAMPLE:**
+```singularity exec --contain $SING_IMAGE python -c 'ds_report'```
 
 
 ## Changes to packages:
@@ -62,7 +67,9 @@ This version has been configured to use pdsh for inter-node communications. No o
 2) exec argument `python` changed to `singularity_wrapper exec python` to PDSH-runner-class
 
 ## Notes
-* **IMPORTANT**: If you have a local installation of deepspeed it may conflict with the one in singularity. Run the following and make sure your install path is identical. If path points to a local installation, you need to shadow it out by renaming the package e.g. ['/users/$USER/.local/lib/python3.8/site-packages/deepspeed'] -->['/users/$USER/.local/lib/python3.8/site-packages/DEEPSPEED'], delete it or do it some other way.
+* **IMPORTANT**: Make sure you use --contain-flag when running to prevent usage of locally installed packages. Otherwise, conflicts with different versions of packages, especially included modified Deepspeed will cause problems. 
+If you want, you can have a local installation of packages but in case of problems, try running ```singularity exec $SING_IMG python -c 'import conflicting_package; print(conflicting_package.__file__)'``` to see whether it is the source of bad behaviour. 
+
 ```
 export SING_IMAGE=/PATH/TO/CONTAINER/deepspeed.sif 
 singularity_wrapper exec ds_report 
