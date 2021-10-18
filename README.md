@@ -23,6 +23,7 @@ export SINGULARITY_TMPDIR=/path/ e.g $HOME/.cache/singularity/
 export SINGULARITY_CACHEDIR=/path/ e.g $HOME/.cache/singularity/
 singularity pull NAME_FOR_IMG docker://ghcr.io/luukkonenr/deepspeed-torch-singularity:latest
  ```
+
 ## Running on CSC-environment
 
 If running on Mahti make sure your $HOME/.ssh/config is looking like this
@@ -42,39 +43,39 @@ module load pdsh/2.31
 export SING_FLAGS="$SING_FLAGS -B /appl/spack/v014/install-tree/gcc-4.8.5/pdsh-2.31-cdzt5w/bin:/usr/local/sbin"`
 export SING_IMAGE=/PATH/TO/CONTAINER/deepspeed.sif # This needs to match the path inside your init_node.sh
 export SING_FLAGS=$SING_FLAGS "--nv" # Enable GPU
-export SING_FLAGS=$SING_FLAGS "--contain" # Shadow /home/$USER/
+export SING_FLAGS=$SING_FLAGS "--contain" # Shadow /home/$USER/ 
 export TORCH_EXT_DIR=/path/to/some/dir/ # I f you have existing dir with some ops, may cause a hang with a msg about using this torch_ext_dir. Try removing that dir and run your job again.
 ```
 
-Using csc singularity_wrapper:
-
-**RUNNING:**
-  `singularity_wrapper exec --contain deepspeed DEEPSPEED_ARGUMENTS path/to/python_script.py PYTHON_ARGUMENTS`
-
-**EXAMPLE:**
-  ```singularity_wrapper exec deepspeed --hostfile=hostfile.txt --master_addr=$MASTER_NODE /projappl/project_2004600/risto/model3multi/training/trainer.py --train_data $TRAIN_DATA \ ... ```
 
 Using plain singularity and `--contain`-flag shadowing the /user/home/ to avoid possible conflicting user-packages:
 
 **EXAMPLE:**
 ```singularity exec --contain $SING_IMAGE python -c 'ds_report'```
+```singularity exec $SING_FLAGS $SING_IMAGE python -c 'ds_report'```
+
+Using csc singularity_wrapper (**not preferred**, may lead to conflicts especially on multinode-setup) :
+
+**RUNNING:**
+  `singularity_wrapper exec deepspeed DEEPSPEED_ARGUMENTS path/to/python_script.py PYTHON_ARGUMENTS`
+
+**EXAMPLE:**
+  ```singularity_wrapper exec deepspeed --hostfile=hostfile.txt --master_addr=$MASTER_NODE /projappl/project_2004600/risto/model3multi/training/trainer.py --train_data $TRAIN_DATA \ ... ```
+
+
 
 
 ## Changes to packages:
 This version has been configured to use pdsh for inter-node communications. No other runners have been tested and may need spesific configurations. 
 `/opt/conda/lib/python3.8/site-packages/deepspeed/launcher/multinode_runner.py` has been modified to contain relevant information about running python inside the container: 
 1) added line "source node_init.sh" *see node_init.sh* to PDSH-runner-class
-2) exec argument `python` changed to `singularity_wrapper exec python` to PDSH-runner-class
+2) exec argument `python` changed to `singularity exec $SING_FLAGS $SING_IMAGE python` to PDSH-runner-class
 
 ## Notes
-* **IMPORTANT**: Make sure you use --contain-flag when running to prevent usage of locally installed packages. Otherwise, conflicts with different versions of packages, especially included modified Deepspeed will cause problems. 
-If you want, you can have a local installation of packages but in case of problems, try running ```singularity exec $SING_IMG python -c 'import conflicting_package; print(conflicting_package.__file__)'``` to see whether it is the source of bad behaviour. 
+* **IMPORTANT**: CSC singularity_wrapper exposes user-libraries even if we use `--contain`-flag  so using it with this container is not a good idea. 
+`--contain`-flag prevents usage of locally installed packages. Otherwise, conflicts with different versions of packages, especially included modified Deepspeed will cause problems. 
 
-```
-export SING_IMAGE=/PATH/TO/CONTAINER/deepspeed.sif 
-singularity_wrapper exec ds_report 
-deepspeed install path ........... ['/opt/conda/lib/python3.8/site-packages/deepspeed']
-```
+
 
 * I've tried to test get build process working with Github Actions but during build I encounter "no space left on device"-error and build crashes. Will try to get this working so newest img would always be ready to get pulled. However, Docker-workflow works.
 
