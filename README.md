@@ -1,4 +1,6 @@
-### NOTE: Docker-workflow with GH-Actions is broken due to a broken dependency, since debian-git-depenceny for image has been removed. TODO: update image path. 
+### NOTE: Docker-workflow with GH-Actions is broken due to a broken dependency, since debian-git-depenceny for image has been removed. 
+TODO: update image path. 
+Previous working image is still available.
 
 # Singularity-recipe-template for building Deepspeed-enabled pytorch-container 
 ## Install singularity
