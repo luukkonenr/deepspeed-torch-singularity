@@ -1,3 +1,5 @@
+### NOTE: Docker-workflow with GH-Actions is broken due to a broken dependency, since debian-git-depenceny for image has been removed. TODO: update image path. 
+
 # Singularity-recipe-template for building Deepspeed-enabled pytorch-container 
 ## Install singularity
 Follow these instructions to install singularity on a system
@@ -22,7 +24,7 @@ export SINGULARITY_CACHEDIR=/path/ e.g $HOME/.cache/singularity/
 export SINGULARITY_TMPDIR=/path/ e.g $HOME/.cache/singularity/
 export SINGULARITY_CACHEDIR=/path/ e.g $HOME/.cache/singularity/
 singularity pull NAME_FOR_IMG docker://ghcr.io/luukkonenr/deepspeed-torch-singularity:latest
- ```
+```
 
 ## Running on CSC-environment
 
